@@ -1,6 +1,7 @@
 import exampleVideoData from '/src/data/exampleVideoData.js';
 import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
+import Search from './Search.js';
 
 // The main component of where child components are displayed
 // The main display of the App Component
@@ -23,9 +24,20 @@ class App extends React.Component {
         this.setState({
         // console.log('data, ', data)
           videos: data
-
         })
     );
+  }
+
+  SearchNewQuery(event) {
+    let query = event.target.value;
+    console.log(query);
+    let options = { key: this.props.YOUTUBE_API_KEY, max: 5, query: query };
+    this.props.searchYouTube(
+      options, data => {
+        this.setState({
+          videos: data
+        });
+      });
   }
 
   onVideoClick(videoFromChild) {
@@ -46,7 +58,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em>  view goes here</h5></div>
+            <div><h5><em>search</em>  <Search SearchNewQuery={this.SearchNewQuery.bind(this)} /></h5></div>
           </div>
         </nav>
         <div className="row">
