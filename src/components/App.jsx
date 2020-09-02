@@ -16,17 +16,17 @@ class App extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   options = {key: props.YOUTUBE_API_KEY};
-  //   console.log('test');
-  //   this.props.searchYoutube(
-  //     options, this.setState(
-  //       console.log('data, ', data);
-  //     videos: data
+  componentDidMount() {
+    let options = { key: this.props.YOUTUBE_API_KEY };
+    this.props.searchYouTube(
+      options, (data) =>
+        this.setState({
+        // console.log('data, ', data)
+          videos: data
 
-  //   )
-  //   )
-  // }
+        })
+    );
+  }
 
   onVideoClick(videoFromChild) {
     // Signals a state change, data store on your client side; reset the database coing from this.state => state machine

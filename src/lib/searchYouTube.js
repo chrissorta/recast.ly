@@ -9,13 +9,13 @@ var searchYouTube = (options, callback) => {
       key: options.key,
       q: options.query,
       part: 'snippet',
-      maxResults: 5,
+      maxResults: options.max || 5,
       type: 'video',
       videoEmbeddable: true
     },
-    success: function () {
+    success: function (data) {
       console.log('YouTube API : Success');
-      callback(data);
+      callback(data.items);
     },
     error: function () {
       // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
